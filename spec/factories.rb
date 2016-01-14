@@ -5,6 +5,10 @@ FactoryGirl.define do
   factory :group do
     level 'B2'
     #schedule
+    factory :group_with_schedule do
+      after(:build) { |g| group.add_biweekly_schedule(:monday, :wednesday, '17:00')}
+    end
+     
     teacher
   end
 
