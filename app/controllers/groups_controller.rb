@@ -23,7 +23,6 @@ class GroupsController < ApplicationController
 
   def classes
     params[:start] && params[:end] or raise 'No start and end params'
-    #@classes = @group.classes_between params[:start], params[:end]
     @classes = @group.classes_between Time.parse(params[:start]), 
                                       Time.parse(params[:end])
     pp @classes

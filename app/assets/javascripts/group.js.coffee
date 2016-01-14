@@ -10,6 +10,9 @@ $(document).ready ->
     defaultDate: getMonday().format('YYYY MM DD'),
     #defaultDate: '2015-12-01', 
     #defaultDate: getMonday(), 
+    minTime: '09:00:00',
+    maxTime: '22:00:00',
+    #firstHour: '14:00:00',
     editable: true,        
     weekends: false,
     header:

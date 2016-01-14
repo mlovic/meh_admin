@@ -1,5 +1,7 @@
 #json.extract! @group, :id, :level, :created_at, :updated_at
 
+# groups/classes.jbuilder
+
 puts 'jbuilder here'
 json.array! @classes do |klass|
   json.title @group.level + ' ' + @group.id.to_s # self.title,

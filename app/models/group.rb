@@ -13,6 +13,10 @@ class Group < ActiveRecord::Base
 
   # schedule could also be another model with has_one relationship
 
+  def self.all_classes
+    
+  end
+
   def name
     "Group #{id}"
   end
@@ -27,9 +31,8 @@ class Group < ActiveRecord::Base
     #end
   #end
 
-  def add_biweekly_schedule(day1, day2, time, duration = 60)
+  def add_biweekly_schedule(day1, day2, time, duration = 60*60)
     # TODO dont i need duration?
-    duration *= 60
     hour, minute = time.split(':')
     time = Time.now.change(hour: hour, minute: minute)
     #p time
@@ -41,9 +44,23 @@ class Group < ActiveRecord::Base
     self
   end
 
+  class Klass
+    @occurrence
+  end
+
   def classes_between(start, finish)
     #self.schedule.occurrences_between Time.parse(start), Time.parse(finish)
-    self.schedule.occurrences_between start, finish
+    return [] unless self.schedule
+
+    classes = self.schedule.occurrences_between start, finish
+
+    # TODO don't know about this
+    classes.each do |klass|
+      klass.class.module_eval { attr_accessor :group} # m-patch IceCube::occurence?
+      klass.group = self
+    end
+
+    return classes
   end
 
 end

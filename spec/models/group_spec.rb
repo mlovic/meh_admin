@@ -14,7 +14,16 @@ RSpec.describe Group do
     #expect(group.schedule).to == sched
   end
 
+  describe '.all_classes' do
+    #create(:group).add_biweekly_schedule(:monday, :wednesday, '17:00')
+    #create(:group).add_biweekly_schedule(:tuesday, :wednesday, '17:00')
+    #Group.all_classes
+
+    
+  end
+
   describe '#add_biweekly_schedule' do
+    # TODO consider removing save or making optional
     it 'works' do
       group.add_biweekly_schedule(:monday, :wednesday, '17:00')
       #p group
@@ -32,43 +41,40 @@ RSpec.describe Group do
     #end
     
     it 'uses time given', focus: false do
-      require 'pp'
       #ActiveRecord::Base.logger = Logger.new(STDOUT)
       group = create(:group)
-      pp group.schedule
       group.add_biweekly_schedule(:monday, :wednesday, '17:00')
-      pp group.schedule
       expect(group.schedule.start_time.hour).to eq 17
     end
   end
 
   describe '#classes_between' do
+    #let(:group) { create(:group, :with_schedule). }
+    let(:group) { build(:group) }
+
     it 'returns both classes in week' do
       group.add_biweekly_schedule(:monday, :wednesday, '17:00')
-      mon = Chronic.parse('next monday').to_time
-      fri = Chronic.parse('next friday').to_time
-      expect(group.classes_between(mon, fri).size).to eq 2
+      expect(group.classes_between(next_monday, next_friday).size).to eq 2
     end
 
-    it 'anotehr' do
+    it 'accepts duration' do
+      group.add_biweekly_schedule(:monday, :wednesday, '17:00', 90*60)
+      klass = group.schedule.next_occurrence
+      duration = klass.end_time - klass.start_time
+      expect(duration).to eq 90*60
+    end
+
+    it 'adds attr to return obj' do
       group.add_biweekly_schedule(:monday, :wednesday, '17:00')
-
-      classes = group.classes_between Time.parse('2016-07-11'), 
-                                      Time.parse('2016-07-15')
-      expect(classes.size).to eq 2
+      klass = group.classes_between(next_monday, next_friday).first
+      expect(klass).to respond_to(:group)
+      expect(klass.group).to be_a Group
+      expect(klass.group.id).to eq group.id
     end
 
-    it 'works' do
-      pending
-      #sched = IceCube::Schedule.new(Time.now, duration: 3600) do |s|
-                #s.add_recurrence_rule IceCube::Rule.weekly
-              #end
-      group.add_biweekly_schedule(:monday, :wednesday, '17:00')
-      future_time = DateTime.now.change(day: 30)
-      p sched.occurrences(future_time).last.start_time
-      p sched.occurrences(future_time).last.end_time
-      p sched.occurrences(future_time).last.to_json
+    it 'when schedule is nil' do
+      expect(group.classes_between(next_monday, next_friday)).to eq []
     end
-    
+
   end
 end
