@@ -8,4 +8,12 @@ module Helpers
   def base_time
     Time.parse('2016-07-10 12:00:00')
   end
+
+  def next_monday
+    Chronic.parse('next monday').to_time
+  end
+
+  def next_friday
+    Chronic.parse('next friday').to_time
+  end
 end
