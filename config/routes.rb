@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resource :calendars, only: :show
 
+  get '/all_classes', to: 'calendars#all_classes'
+
   resources :weekly_classes, only: :index
 
   resources :groups do
