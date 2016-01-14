@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @group.teacher.name %>
+  <strong>Level:</strong>
+  <%= @group.level %>
+  <ul>
+    <% @group.students.each do |student| %>
+      <li><%= student.name %></li>
+    <% end %>
+  </ul>
+  <strong>Days:</strong>
+  <ul>
+    <% @group.weekly_classes.each do |klass| %>
+      <li><%= klass.day_of_week %></li>
+    <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
+
+
+<div id="single-group-calendar" data-group-id="<%= @group.id %>"></div>
+<%# render 'calendar' %>

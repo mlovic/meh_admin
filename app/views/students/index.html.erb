@@ -1,0 +1,38 @@
+<h1>Listing students <span id="num-students">(<%= Student.all.size %>)</span></h1>
+
+<div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="What you looking for?">
+</div>
+
+<span class="counter pull-right"></span>
+
+<table class="table table-hover results">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Phone</th>
+      <th>Level</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= link_to student.name, student %></td>
+        <td><%= student.age %></td>
+        <td>
+          <a href="tel:<%= student.phone %>"><%= student.phone %></a>
+        </td>
+        <td><%= student.level %></td>
+        <td><%= student.notes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student', new_student_path %>
