@@ -1,4 +1,4 @@
-<%= form_for(@student) do |f| %>
+<%= form_for(@student, html: {class: 'form-horizontal'}) do |f| %>
   <% if @student.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
@@ -11,28 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :date_of_birth %><br>
-    <%= f.date_select :date_of_birth %>
+    <%= f.date_select :date_of_birth, html: {class: 'form-control'} %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
+    <%= f.text_field :phone, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :level %><br>
-    <%= f.text_field :level %>
+    <%= f.text_field :level, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :notes %><br>
-    <%= f.text_field :notes %>
+    <%= f.text_field :notes, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :group%><br>
+    <%= f.label :group %><br>
     <%= f.collection_select :group_id, Group.all, :id, :name_with_level %>
     <%# prompt or include blank option. Also put namewithlevel in view helper%>
   </div>
