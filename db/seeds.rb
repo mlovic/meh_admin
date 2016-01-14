@@ -43,6 +43,12 @@ g = Group.find(1)
 g.add_biweekly_schedule(1, 3, '17:00')
 g = Group.find(2)
 g.add_biweekly_schedule(2, 4, '18:30')
+g = Group.find(3)
+g.add_biweekly_schedule(1, 4, '18:30')
+g = Group.find(4)
+g.add_biweekly_schedule(2, 4, '16:30')
+g = Group.find(5)
+g.add_biweekly_schedule(2, 4, '19:30')
 
 Group.all.each_with_index do |g, i|
   puts 'doing gropup' + i.to_s
