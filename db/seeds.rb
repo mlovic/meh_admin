@@ -1,15 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 LEVELS = %w[A1 A2 B1 B2 C1]
 
 Timecop.freeze Chronic.parse('last sunday at 12:00')
-#IceCube.compatibility = 12 # ?
 
 Fabricator(:student) do
   name { Faker::Name.name }
@@ -31,7 +22,7 @@ end
 #Teacher.create(name: "Izzy", color: 'red')
 #Teacher.create(name: "Marina", color: 'blue')
 
-4.times { Fabricate(:group) }
+5.times { Fabricate(:group) }
 sched =[{1 => Time.parse('17:00')},
         {3 => Time.parse('18:00')},
         {2 => Time.parse('17:00')}, 
