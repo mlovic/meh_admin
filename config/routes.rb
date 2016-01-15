@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :teachers
   resource :calendars, only: :show
 
   get '/all_classes', to: 'calendars#all_classes'

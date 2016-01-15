@@ -1,27 +1,34 @@
-<h1>Listing groups</h1>
+<div class="page-header">
+  <%= link_to new_group_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Group
+  <% end %>
+  <h1>Listing groups</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Level</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
       <tr>
-        <td><%= group.name %></td>
-        <td><%= group.level %></td>
-        <td><%= link_to 'Show', group %></td>
+            <th>Level</th>
+            <th>Name</th>
+            <th>Teacher</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @groups) do |group| %>
+            <td><%= group.level %></td>
+            <td><%= group.name %></td>
+            <td><%= group.teacher.name %></td>
+            <%#TODO lonely op here%>
+            <td><%= link_to 'Show', group %></td>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Group', new_group_path %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
