@@ -223,7 +223,7 @@ DEPENDENCIES
   faker
   fullcalendar-rails
   guard-rspec
-  ice_cube
+  ice_cube (= 0.13.2)
   jbuilder (~> 2.0)
   jquery-rails
   momentjs-rails

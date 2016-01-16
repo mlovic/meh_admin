@@ -40,7 +40,7 @@ gem 'spring',        group: :development
 
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
-gem 'ice_cube'
+gem 'ice_cube', '0.13.2' # Timetable class extends this library. Keep version.
 gem 'chronic'
 gem 'timecop'
 gem 'bootstrap-generators', '~> 3.3.4'
