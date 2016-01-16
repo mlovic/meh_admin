@@ -1,5 +1,10 @@
 <h1>Listing students <span id="num-students">(<%= Student.all.size %>)</span></h1>
 
+<%= link_to new_student_path, class: 'btn btn-primary' do %>
+  <span class="glyphicon glyphicon-plus"></span>
+  New Student
+<% end %>
+
 <div class="form-group pull-right">
     <input type="text" class="search form-control" placeholder="What you looking for?">
 </div>
