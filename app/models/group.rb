@@ -10,6 +10,8 @@ class Group < ActiveRecord::Base
   belongs_to :teacher
   #has_one :schedule
 
+  delegate :hours_per_week, to: :schedule
+
 
   # schedule could also be another model with has_one relationship
 
@@ -17,12 +19,23 @@ class Group < ActiveRecord::Base
     
   end
 
+  #def hours_per_week
+    #return 0 unless self.schedule
+    #schedule
+  #end
+
   def name
     "Group #{id}"
   end
 
   def name_with_level
     "Group #{id} - #{level}"
+  end
+
+  def schedule
+    # TODO delegate methods
+    read_attribute(:schedule).extend Timetable
+    # how to avoid reading if already loaded? memoize to inst var?
   end
 
   #def schedule

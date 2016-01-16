@@ -22,6 +22,17 @@ RSpec.describe Group do
     
   end
 
+  describe '#schedule' do
+    let(:group) { build(:group_with_schedule) }
+    it 'returns an IceCube::Schedule' do
+      expect(group.schedule).to be_a IceCube::Schedule
+    end
+    it 'mixes in Timetable' do
+      #expect(group.schedule).to be_extend Timetable 
+      expect(group.schedule).to respond_to :hours_per_week
+    end
+  end
+
   describe '#add_biweekly_schedule' do
     # TODO consider removing save or making optional
     it 'works' do
