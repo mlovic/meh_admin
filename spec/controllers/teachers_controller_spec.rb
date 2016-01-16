@@ -57,6 +57,7 @@ RSpec.describe TeachersController, type: :controller do
     it 'returns json' do
       body = JSON.parse(response.body)
       expect(body.size).to eq 4
+      expect(body.first['color']).to eq 'red'
     end
     it ' ' do
       #create(:teacher)
