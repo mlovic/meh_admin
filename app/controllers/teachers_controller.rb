@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :classes]
 
   # GET /teachers
   # GET /teachers.json
@@ -19,6 +19,17 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1/edit
   def edit
+  end
+
+  def classes
+    params[:start] && params[:end] or raise 'No start and end params'
+    @classes = @teacher.classes_between Time.parse(params[:start]), 
+                                        Time.parse(params[:end])
+    pp @classes
+    respond_to do |format|
+      #format.html
+      format.json { render 'classes' }
+    end
   end
 
   # POST /teachers

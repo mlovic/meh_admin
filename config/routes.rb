@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :teachers
+  resources :teachers do
+    get 'classes', on: :member
+  end
+
   resource :calendars, only: :show
 
   get '/all_classes', to: 'calendars#all_classes'

@@ -24,17 +24,45 @@ RSpec.describe TeachersController, type: :controller do
   # Teacher. As you add validations to Teacher, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    #skip("Add a hash of attributes valid for your model")
+    { name: 'Izzy', color: 'red' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    #skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TeachersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  describe "GET #classes.json", time_sensitive: true do
+    let(:teacher) { create(:izzy) }
+    before do
+      group = create(:group, teacher: teacher)
+      group.add_biweekly_schedule(:monday, :wednesday, '17:00')
+      group = create(:group, teacher: teacher)
+      group.add_biweekly_schedule(:tuesday, :thursday, '18:00')
+      # TODO should i mock the classes_between?
+      get :classes, format: :json, :id => '1', 'start' => '2016-07-11', 
+                                                'end'   => '2016-07-15'
+    end
+
+    it 'renders classes template' do
+      expect(response).to render_template("application/classes")
+    end
+
+    it 'returns json' do
+      body = JSON.parse(response.body)
+      expect(body.size).to eq 4
+    end
+    it ' ' do
+      #create(:teacher)
+    end
+    
+  end
 
   describe "GET #index" do
     it "assigns all teachers as @teachers" do
@@ -43,6 +71,7 @@ RSpec.describe TeachersController, type: :controller do
       expect(assigns(:teachers)).to eq([teacher])
     end
   end
+
 
   describe "GET #show" do
     it "assigns the requested teacher as @teacher" do

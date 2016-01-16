@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController do
-  describe 'GET /classes' do
-    before(:all) { Timecop.freeze(base_time) }
-    after(:all)  { Timecop.return }
+  describe 'GET /classes', time_sensitive: true do
     before do
       group = create(:group)
       group.add_biweekly_schedule(:monday, :wednesday, '17:00')

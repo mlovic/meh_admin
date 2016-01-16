@@ -6,7 +6,8 @@ module Helpers
   end
 
   def base_time
-    Time.parse('2016-07-10 12:00:00')
+    Time.parse('2016-07-10 12:00:00') # arbitrary date picked for convenience. 
+                                      # Monday is 11th
   end
 
   def next_monday
