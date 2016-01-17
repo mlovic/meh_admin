@@ -12,6 +12,8 @@ class Group < ActiveRecord::Base
 
   delegate :hours_per_week, to: :schedule
 
+  # TODO custom validator?
+  validates :level, inclusion: { in: ::EFL_LEVELS }, allow_nil: true
 
   # schedule could also be another model with has_one relationship
 

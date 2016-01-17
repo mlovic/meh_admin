@@ -14,6 +14,13 @@ RSpec.describe Group do
     #expect(group.schedule).to == sched
   end
 
+  it 'saves only valid level' do
+    group.level = 'B1'
+    expect(group).to     be_valid
+    group.level = 'D1'
+    expect(group).to_not be_valid
+  end
+
   describe '.all_classes' do
     #create(:group).add_biweekly_schedule(:monday, :wednesday, '17:00')
     #create(:group).add_biweekly_schedule(:tuesday, :wednesday, '17:00')

@@ -12,6 +12,14 @@ FactoryGirl.define do
     teacher
   end
 
+  factory :adult, aliases: [:student] do
+    sequence(:name) { |n| "Adult #{n}" }
+  end
+
+  factory :child do
+    sequence(:name) { |n| "Child #{n}" }
+  end
+
   #factory :schedule do
     #ice_cube_data IceCube::Schedule.new(Time.now, duration: 3600) { |s| s.add_recurrence_rule IceCube::Rule.weekly.day(1, 3) }
   #end

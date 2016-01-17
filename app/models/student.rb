@@ -10,6 +10,7 @@ class Student < ActiveRecord::Base
   validates :name, presence: true
 
   def age
+    return nil unless date_of_birth
     now = Time.now.utc.to_date
     now.year - date_of_birth.year - (date_of_birth.to_date.change(:year => now.year) > now ? 1 : 0)
   end
