@@ -1,4 +1,4 @@
-<h1>Listing students <span id="num-students">(<%= Student.all.size %>)</span></h1>
+<span id="num-students"><%= Student.all.size %> students</span>
 
 <%= link_to new_student_path, class: 'btn btn-primary' do %>
   <span class="glyphicon glyphicon-plus"></span>
