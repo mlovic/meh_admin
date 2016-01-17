@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :adults, :controller => "students", :type => "adult"
+  resources :children, :controller => "students", :type => "child"
+  # TODO maybe use only students and somehow child_url -> student_url
+  resources :students
   resources :teachers do
     get 'classes', on: :member
   end

@@ -7,6 +7,8 @@ class Student < ActiveRecord::Base
 
   belongs_to :group
 
+  validates :name, presence: true
+
   def age
     now = Time.now.utc.to_date
     now.year - date_of_birth.year - (date_of_birth.to_date.change(:year => now.year) > now ? 1 : 0)

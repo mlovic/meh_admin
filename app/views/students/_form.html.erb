@@ -16,6 +16,13 @@
     <%= f.text_field :name %>
   </div>
   <div class="field form-group">
+    <%= f.label :type, "Adult", :value => "Adult"  %>
+    <%= f.radio_button :type, 'Adult' %>
+    <%= f.label :type, "Child", :value => "Child" %>
+    <%= f.radio_button :type, 'Child', :checked => true %>
+  </div>
+
+  <div class="field form-group">
     <%= f.label :date_of_birth %><br>
     <%= f.date_select :date_of_birth, html: {class: 'form-control'} %>
   </div>
