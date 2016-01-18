@@ -14,8 +14,14 @@ class Group < ActiveRecord::Base
 
   # TODO custom validator?
   validates :level, inclusion: { in: ::EFL_LEVELS }, allow_nil: true
+  #validates :schedule, :no_overlap
 
   # schedule could also be another model with has_one relationship
+  def schedules_cannot_overlap
+    self.teacher.groups.any do |g|
+      g.schedule.overlaps_with? self.schedule
+    end
+  end
 
   def self.all_classes
     
@@ -55,7 +61,13 @@ class Group < ActiveRecord::Base
                       s.add_recurrence_rule Rule.weekly.day(day1, day2)
                     end
     #pp self.schedule
-    save!
+    #save!
+    self
+  end
+
+  def add_biweekly_schedule!(day1, day2, time, duration = 60*60)
+    add_biweekly_schedule(day1, day2, time, duration)
+    self.save
     self
   end
 

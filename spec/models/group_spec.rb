@@ -21,6 +21,16 @@ RSpec.describe Group do
     expect(group).to_not be_valid
   end
 
+  it 'does not save overlapping schedules' do
+    teacher = create(:izzy)
+    group1 = create(:group, teacher: teacher)
+    group2 = create(:group, teacher: teacher)
+    group1.add_biweekly_schedule(:monday, :wednesday, '17:00', 60*60)
+    group1.save
+    group2.add_biweekly_schedule(:tuesday, :wednesday, '17:30')
+    expect(group2).to_not be_valid
+  end
+
   describe '.all_classes' do
     #create(:group).add_biweekly_schedule(:monday, :wednesday, '17:00')
     #create(:group).add_biweekly_schedule(:tuesday, :wednesday, '17:00')
@@ -47,6 +57,22 @@ RSpec.describe Group do
       #p group
       expect(group.schedule).to be_a IceCube::Schedule
     end
+
+    it 'does not save record' do
+      group.save
+      group.add_biweekly_schedule(:monday, :wednesday, '17:00')
+      expect(Group.first.schedule).to be_nil
+    end
+
+  describe '#add_biweekly_schedule' do
+
+    it 'saves record' do
+      group.save
+      group.add_biweekly_schedule!(:monday, :wednesday, '17:00')
+      expect(Group.first.schedule).to_not be_nil
+    end
+  end
+
 
     #it 'try sched', focus: false do
       #ActiveRecord::Base.logger = Logger.new(STDOUT)
